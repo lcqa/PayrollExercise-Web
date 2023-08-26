@@ -1,0 +1,9 @@
+.header-section {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px solid black;
+
+    .name-section {
+        margin-right: auto;
+    }
+}

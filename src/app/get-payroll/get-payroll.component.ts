@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PayrollHttpService } from '../shared/services/payroll.http.service';
 import { Employee } from '../shared/models/employee.model';
 import { GetEmployeePayrollRequest } from '../shared/models/payroll.http.model';
+import { Selection } from '../shared/models/base.model';
 
 @Component({
   selector: 'app-get-payroll',
@@ -12,6 +13,23 @@ export class GetPayrollComponent {
 
   employeeDetails = {} as Employee;
   request = {} as GetEmployeePayrollRequest;
+  isSubmitted = false;
+
+  months: Selection<number>[] = [
+    {name: 'January', value: 1},
+    {name: 'February', value: 2},
+    {name: 'March', value: 3},
+    {name: 'April', value: 4},
+    {name: 'May', value: 5},
+    {name: 'June', value: 6},
+    {name: 'July', value: 7},
+    {name: 'August', value: 8},
+    {name: 'September', value: 9},
+    {name: 'October', value: 10},
+    {name: 'November', value: 11},
+    {name: 'December', value: 12}
+  ]
+
   constructor(private payrollService: PayrollHttpService){
 
   }
@@ -25,6 +43,7 @@ export class GetPayrollComponent {
   {
     this.payrollService.GetPayrollDetails(this.request).subscribe(response => {
        this.employeeDetails = response.data ?? {} as Employee;
+       this.isSubmitted = true;
        console.log(this.employeeDetails);
     },
     error => {
