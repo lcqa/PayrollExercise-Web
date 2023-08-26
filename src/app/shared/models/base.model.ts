@@ -4,3 +4,8 @@ export interface Response<T>
     message: string,
     statusCode: number
 }
+
+export interface Selection<T> {
+    name: string,
+    value: T
+}

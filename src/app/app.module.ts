@@ -6,11 +6,15 @@ import { AppComponent } from './app.component';
 import { GetPayrollComponent } from './get-payroll/get-payroll.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { NavTopComponent } from './nav/nav-top/nav-top.component';
+import { InformationComponent } from './information/information.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GetPayrollComponent
+    GetPayrollComponent,
+    NavTopComponent,
+    InformationComponent
   ],
   imports: [
     BrowserModule,
