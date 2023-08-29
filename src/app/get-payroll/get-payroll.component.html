@@ -1,10 +1,15 @@
 <div class="container">
+    <div class="alerts">
+        <p *ngFor="let error of errorMessage">
+            <ngb-alert [type]="'danger'" (closed)="closeAlert(error)">{{error}}</ngb-alert>
+        </p>
+    </div>
+
     <div class="row mb-3">
         <label for="first-name" class="col-sm-2 col-form-label">First Name</label>
         <div class="col-sm-10">
             <input type="text" id="first-name" class="form-control" [(ngModel)]="request.firstName">
-        </div>
-        
+        </div>  
     </div>
 
     <div class="row mb-3">
@@ -34,7 +39,7 @@
     <div class="row mb-3">
         <label for="pay-period" class="col-sm-2 col-form-label">Pay Period</label>
         <div class="col-sm-10">
-            <select class="form-control" id="pay-period" [(ngModel)]="request.payPeriod">
+            <select class="form-select" id="pay-period" [(ngModel)]="request.payPeriod">
                 <option *ngFor="let month of months" [value]="month.value">
                     {{month.name}}
                 </option>
@@ -42,7 +47,7 @@
         </div>
     </div>
 
-    <button class="btn btn-primary" (click)="submit()">Submit</button>
+    <button class="btn btn-primary" (click)="submit()">Generate Payslip</button>
 </div>
 
 <div class="container" *ngIf="isSubmitted">
@@ -58,47 +63,16 @@
     </div>
     <div>
         <div class="row">
-            <h5>Gross Income: </h5>
-            <h5>{{employeeDetails.payrollDetails.grossIncome}}</h5>
+            <h5>Gross Income:  {{employeeDetails.payrollDetails.grossIncome.toFixed(2)}}</h5>
         </div>
         <div>
-            <h5>Income Tax: {{employeeDetails.payrollDetails.incomeTax}}</h5>
+            <h5>Income Tax: {{employeeDetails.payrollDetails.incomeTax.toFixed(2)}}</h5>
         </div>
         <div>
-            <h5>Income Tax: {{employeeDetails.payrollDetails.netIncome}}</h5>
+            <h5>Net Income: {{employeeDetails.payrollDetails.netIncome.toFixed(2)}}</h5>
         </div>
         <div>
-            <h5>Super: {{employeeDetails.payrollDetails.super}}</h5>
+            <h5>Super: {{employeeDetails.payrollDetails.super.toFixed(2)}}</h5>
         </div>
     </div>
-
-    <!-- <div>
-        <label for="employee-first-name">First Name</label>
-        <input type="text" id="employee-first-name" [(ngModel)]="employeeDetails.firstName" [disabled]="true">
-    </div>
-
-    <div>
-        <label for="employee-last-name">Last Name</label>
-        <input type="text" id="employee-last-name" [(ngModel)]="employeeDetails.lastName"  [disabled]="true">
-    </div>
-
-    <div>
-        <label for="employee-pay-period">Pay Period</label>
-        <input type="text" id="employee-pay-period" [(ngModel)]="employeeDetails.payrollDetails.payPeriod"  [disabled]="true">
-    </div>
-
-    <div>
-        <label for="employee-gross-income">Gross Income</label>
-        <input type="text" id="employee-gross-income" [(ngModel)]="employeeDetails.payrollDetails.grossIncome"  [disabled]="true">
-    </div>
-
-    <div>
-        <label for="employee-income-tax">Income Tax</label>
-        <input type="text" id="employee-income-tax" [(ngModel)]="employeeDetails.payrollDetails.incomeTax" [disabled]="true">
-    </div>
-
-    <div>
-        <label for="employee-super">Super</label>
-        <input type="text" id="employee-super" [(ngModel)]="employeeDetails.payrollDetails.super" [disabled]="true">
-    </div> -->
 </div>

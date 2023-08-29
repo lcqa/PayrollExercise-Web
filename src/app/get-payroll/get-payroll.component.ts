@@ -30,6 +30,8 @@ export class GetPayrollComponent {
     {name: 'December', value: 12}
   ]
 
+  errorMessage = [] as string[];
+
   constructor(private payrollService: PayrollHttpService){
 
   }
@@ -41,14 +43,24 @@ export class GetPayrollComponent {
 
   submit(): void
   {
+    this.errorMessage = [];
     this.payrollService.GetPayrollDetails(this.request).subscribe(response => {
        this.employeeDetails = response.data ?? {} as Employee;
        this.isSubmitted = true;
-       console.log(this.employeeDetails);
     },
     error => {
       console.log(error);
+      var keys = Object.keys(error.error.errors);
+
+      for(let i =0; i < keys.length; i++)
+      {
+        this.errorMessage.push(`${keys[i]}: ${error.error.errors[keys[i]]}`);
+      }
     });
+  }
+
+  closeAlert(alertMessage: string): void {
+    this.errorMessage.splice(this.errorMessage.indexOf(alertMessage), 1);
   }
 
 }
